@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://b76n80msqdg7o"]
+
+[ext_resource type="PackedScene" uid="uid://dfxd84rthq72v" path="res://Actors/Background/Background.tscn" id="1_ub2v8"]
+[ext_resource type="PackedScene" uid="uid://b74nfwph2q68u" path="res://Actors/Borders/HorzBorderBlue.tscn" id="2_g3egk"]
+[ext_resource type="PackedScene" uid="uid://df33b0yeyrhh" path="res://Actors/Borders/VertBorderBlue.tscn" id="3_14gkn"]
+[ext_resource type="PackedScene" uid="uid://bsawj17ay8yui" path="res://Actors/Borders/HorzBorderRed.tscn" id="4_fvnwj"]
+[ext_resource type="PackedScene" uid="uid://dpu65gxp7fl2u" path="res://Actors/Borders/VertBorderRed.tscn" id="5_2uutx"]
+[ext_resource type="PackedScene" uid="uid://b0omd46gki1a" path="res://Actors/Players/MousePlayer.tscn" id="6_kuyih"]
+[ext_resource type="PackedScene" uid="uid://d0ro78s4ntfdm" path="res://Actors/Ball/Ball.tscn" id="7_4ectl"]
+
+[node name="BaseLevel" type="Node2D"]
+
+[node name="Background" parent="." instance=ExtResource("1_ub2v8")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="LeftBorder" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Borders/LeftBorder"]
+polygon = PackedVector2Array(-140, -912, -140, -1216, -800, -1216, -800, 1216, -140, 1216, -140, 912, -492, 912, -492, -912)
+
+[node name="RightBorder" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Borders/RightBorder"]
+polygon = PackedVector2Array(140, -912, 140, -1216, 800, -1216, 800, 1216, 140, 1216, 140, 912, 492, 912, 492, -912)
+
+[node name="TopBorder" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Borders/TopBorder"]
+polygon = PackedVector2Array(-140, -960, 140, -960, 140, -1216, -140, -1216)
+
+[node name="BottomBorder" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Borders/BottomBorder"]
+polygon = PackedVector2Array(-140, 960, 140, 960, 140, 1216, -140, 1216)
+
+[node name="VertBorderRed" parent="Borders" instance=ExtResource("5_2uutx")]
+position = Vector2(-508, -452)
+
+[node name="HorzBorderRed" parent="Borders" instance=ExtResource("4_fvnwj")]
+position = Vector2(-332, -928)
+
+[node name="HorzBorderRed2" parent="Borders" instance=ExtResource("4_fvnwj")]
+position = Vector2(332, -928)
+
+[node name="VertBorderRed2" parent="Borders" instance=ExtResource("5_2uutx")]
+position = Vector2(508, -452)
+
+[node name="VertBorderBlue" parent="Borders" instance=ExtResource("3_14gkn")]
+position = Vector2(508, 452)
+
+[node name="VertBorderBlue2" parent="Borders" instance=ExtResource("3_14gkn")]
+position = Vector2(-508, 452)
+
+[node name="HorzBorderBlue" parent="Borders" instance=ExtResource("2_g3egk")]
+position = Vector2(-332, 928)
+
+[node name="HorzBorderBlue2" parent="Borders" instance=ExtResource("2_g3egk")]
+position = Vector2(332, 928)
+
+[node name="MousePlayer" parent="." instance=ExtResource("6_kuyih")]
+position = Vector2(0, 736)
+
+[node name="Ball" parent="." instance=ExtResource("7_4ectl")]

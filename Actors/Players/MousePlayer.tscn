@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0omd46gki1a"]
+
+[ext_resource type="Texture2D" uid="uid://cc8swgxy8j1bj" path="res://Actors/Players/Player.svg" id="1_ds8vs"]
+[ext_resource type="Script" path="res://Actors/Players/MousePlayer.cs" id="1_wriqw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wbj4x"]
+radius = 96.0
+
+[node name="MousePlayer" type="CharacterBody2D"]
+collision_layer = 2
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_wriqw")
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = ExtResource("1_ds8vs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wbj4x")

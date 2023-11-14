@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsawj17ay8yui"]
+
+[ext_resource type="PackedScene" uid="uid://d0irqnyxt7p1t" path="res://Actors/Borders/BorderBase.tscn" id="1_2cmx7"]
+[ext_resource type="Texture2D" uid="uid://bg8k2w6yj6cag" path="res://Actors/Borders/HorzBorderRed.svg" id="2_kvlwq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqt1g"]
+size = Vector2(384, 32)
+
+[node name="HorzBorderRed" instance=ExtResource("1_2cmx7")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_kvlwq")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_yqt1g")

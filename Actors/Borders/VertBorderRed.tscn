@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpu65gxp7fl2u"]
+
+[ext_resource type="PackedScene" uid="uid://d0irqnyxt7p1t" path="res://Actors/Borders/BorderBase.tscn" id="1_mngd0"]
+[ext_resource type="Texture2D" uid="uid://dfg8j3qutpjcb" path="res://Actors/Borders/VertBorderRed.svg" id="2_daywq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3ftl"]
+size = Vector2(32, 888)
+
+[node name="VertBorderRed" instance=ExtResource("1_mngd0")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_daywq")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_s3ftl")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfxd84rthq72v"]
+
+[ext_resource type="Texture2D" uid="uid://ur7uptjlixx3" path="res://Actors/Background/Background.svg" id="1_ciupa"]
+
+[node name="Background" type="Sprite2D"]
+texture = ExtResource("1_ciupa")
