@@ -1,96 +1,116 @@
 using Godot;
 using System;
 
-public partial class Ball : RigidBody2D
+public partial class Ball : CharacterBody2D
 {
 
-    public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+    private Vector2 direction;
+    private float speed;
+    private float friction = 0.75f;
+    int frameSkip = 0;
+
+    public float Speed
     {
-        if (state.LinearVelocity.Length() > 2000)
+        get => speed;
+        set
         {
-            state.LinearVelocity *= 4000 / state.LinearVelocity.Length();
+            speed = Math.Clamp(value, 0, 4000);
         }
-        base._IntegrateForces(state);
     }
 
-    //private Vector2 directionSpeed;
 
-    //public Vector2 DirectionSpeed
-    //{
-    //    get => directionSpeed;
-    //    set
-    //    {
-    //        var len = value.Length();
-    //        if (len > 2000)
-    //        {
-    //            directionSpeed = value.Normalized() * 2000;
-    //        }
-    //        else
-    //        {
-    //            directionSpeed = value;
-    //        }
-    //    }
-    //}
+    public override void _PhysicsProcess(double delta)
+    {
 
-    //// Called when the node enters the scene tree for the first time.
-    //public override void _Ready()
-    //{
-    //}
+        base._PhysicsProcess(delta);
 
-    //// Called every frame. 'delta' is the elapsed time since the previous frame.
-    //public override void _Process(double delta)
-    //{
-    //}
+        if (frameSkip <= 0)
+        {
+            CollisionMask |= 2u;
+        }
+        else
+        {
+            frameSkip--;
+        }
 
-    //public override void _PhysicsProcess(double delta)
-    //{
+        var travel = direction * Speed * (float)delta;
 
+        int i = 0;
 
-    //    var travel = DirectionSpeed * (float)delta;
-
-    //    //var hit = MoveAndCollide(DirectionSpeed * (float)delta);
-
-    //    //if (hit != null)
-    //    //{
-    //    //    DirectionSpeed = DirectionSpeed.Bounce(hit.GetNormal());
-    //    //}
-
-    //    for (int i = 0; i < 2; i++)
-    //    {
-    //        var hit = MoveAndCollide(travel);
-
-    //        if (hit == null)
-    //        {
-    //            break;
-    //        }
+        for (; i < 4; i++)
+        {
 
 
 
-    //        var angle = travel.AngleTo(hit.GetNormal());
-    //        GD.Print(angle);
-    //        if (Math.Abs(angle) < 1.8)
-    //        {
-    //            travel = travel.Slide(hit.GetNormal());
-
-    //            //if (travel.Length() > 0.01)
-    //            //{
-    //            //    DirectionSpeed = travel.Normalized() * DirectionSpeed.Length();
-    //            //}
-    //        }
-    //        else
-    //        {
-    //            DirectionSpeed = DirectionSpeed * 0.9f;
-    //            travel = travel.Bounce(hit.GetNormal());
-    //            DirectionSpeed = DirectionSpeed.Bounce(hit.GetNormal());
-    //        }
+            var hit = MoveAndCollide(travel);
 
 
-    //        //GD.Print(travel.AngleTo(hit.GetNormal()));
 
-    //        //var reminder = mouse - GlobalPosition;
-    //        //direction = reminder.Slide(hit.GetNormal());
+            if (hit == null)
+                break;
 
-    //    }
+            if (i == 0)
+            {
+                var player = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+                if (player.GetPlaybackPosition() > 0.05 || !player.Playing)
+                    player.Play();
+            }
 
-    //}
+            var normal = hit.GetNormal();
+
+            if (hit.GetCollider() is PlayerBase characterBody && characterBody.CurrentSpeed.Length() > speed / 2)
+            {
+
+
+
+                var target = (Position - characterBody.Position).Normalized() * speed;
+                var targetVelocity = characterBody.CurrentSpeed * 2;
+
+                direction = (target + targetVelocity) / 2;
+
+
+                Speed = direction.Length() / friction;
+
+                if (Speed < 500) Speed = 500;
+
+                direction = direction.Normalized();
+
+                travel = direction * Speed * (float)delta;
+
+                //if ((characterBody.Position - Position).Length() < 110)
+                //{
+                //    frameSkip = 30;
+                //    Speed = 4000;
+                //}
+                ////GD.Print((characterBody.Position - Position).Length());
+                //else
+                {
+                    frameSkip = 2;
+                }
+                CollisionMask &= ~2u;
+
+
+            }
+            else
+            {
+                speed = speed * friction;
+
+                travel -= hit.GetTravel();
+
+
+                travel = travel.Bounce(normal);
+                direction = direction.Bounce(normal);
+            }
+        }
+
+        if (i >= 4)
+        {
+            frameSkip = 30;
+            Speed = 4000;
+            CollisionMask &= ~2u;
+        }
+
+
+    }
+
 }

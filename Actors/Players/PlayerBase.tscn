@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://u65jud100tyf"]
+
+[ext_resource type="Texture2D" uid="uid://cc8swgxy8j1bj" path="res://Actors/Players/Player.svg" id="1_d0y21"]
+[ext_resource type="Script" path="res://Actors/Players/PlayerBase.cs" id="1_hlw02"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ri6p"]
+radius = 96.0
+
+[node name="PlayerBase" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+wall_min_slide_angle = 0.785398
+platform_on_leave = 2
+script = ExtResource("1_hlw02")
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = ExtResource("1_d0y21")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8ri6p")

@@ -2,22 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://yn0foortuqfd" path="res://Actors/Ball/Ball.svg" id="1_jlreo"]
 [ext_resource type="Script" path="res://Actors/Ball/Ball.cs" id="1_xvhft"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_64s6n"]
-friction = 0.0
-bounce = 1.0
+[ext_resource type="AudioStream" uid="uid://6y4dt7mygdg2" path="res://Actors/Ball/hit.wav" id="3_shl25"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_07ivq"]
 radius = 48.0
 
-[node name="Ball" type="RigidBody2D"]
+[node name="Ball" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
-physics_material_override = SubResource("PhysicsMaterial_64s6n")
-gravity_scale = 0.0
-can_sleep = false
-custom_integrator = true
-continuous_cd = 1
+motion_mode = 1
+wall_min_slide_angle = 0.0872665
+platform_on_leave = 2
 script = ExtResource("1_xvhft")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -25,3 +20,6 @@ texture = ExtResource("1_jlreo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_07ivq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_shl25")

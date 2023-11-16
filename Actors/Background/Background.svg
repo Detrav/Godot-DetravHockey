@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.73827583"
-     inkscape:cx="904.13362"
-     inkscape:cy="761.91036"
+     inkscape:zoom="0.52203985"
+     inkscape:cx="878.28545"
+     inkscape:cy="1047.8127"
      inkscape:window-width="3440"
      inkscape:window-height="1369"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1-5" />
+     inkscape:current-layer="layer1" />
   <defs
      id="defs1">
     <linearGradient
@@ -66,41 +66,50 @@
      inkscape:label="Слой 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <g
-       inkscape:label="Back"
-       inkscape:groupmode="layer"
-       id="layer1-5"
-       transform="matrix(0.26458333,0,0,0.26458333,0.10038147,0)">
-      <rect
-         style="fill:url(#linearGradient14);stroke:none;stroke-width:13.8509;stroke-dasharray:none;stroke-opacity:1"
-         id="rect13"
-         width="1920"
-         height="1080"
-         x="0"
-         y="-1079.6206"
-         rx="0"
-         ry="0"
-         transform="rotate(90)" />
-      <circle
-         style="fill:none;stroke:#282828;stroke-width:3.93846;stroke-dasharray:none;stroke-opacity:1"
-         id="path11"
-         cx="540"
-         cy="958.03076"
-         r="126.03077" />
-      <circle
-         style="fill:none;stroke:#282828;stroke-width:4.92309;stroke-dasharray:none;stroke-opacity:1"
-         id="circle11"
-         cx="538.46155"
-         cy="960"
-         r="157.53845" />
-      <path
-         style="fill:none;stroke:#282828;stroke-width:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 380.9231,960 H 63.999996"
-         id="path12" />
-      <path
-         style="fill:none;stroke:#282828;stroke-width:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 696,960 h 320"
-         id="path13" />
-    </g>
+    <rect
+       style="fill:#ffffff;stroke-width:1.39468;fill-opacity:1"
+       id="rect1"
+       width="285.75"
+       height="508"
+       x="1.5380861e-09"
+       y="4.4408921e-16"
+       rx="0"
+       ry="0" />
+  </g>
+  <g
+     inkscape:label="Back"
+     inkscape:groupmode="layer"
+     id="layer1-5"
+     transform="matrix(0.26458333,0,0,0.26458333,0.10038147,0)">
+    <rect
+       style="fill:url(#linearGradient14);stroke:none;stroke-width:13.8509;stroke-dasharray:none;stroke-opacity:1"
+       id="rect13"
+       width="1920"
+       height="1080"
+       x="0"
+       y="-1079.6206"
+       rx="0"
+       ry="0"
+       transform="rotate(90)" />
+    <circle
+       style="fill:none;stroke:#282828;stroke-width:3.93846;stroke-dasharray:none;stroke-opacity:1"
+       id="path11"
+       cx="540"
+       cy="958.03076"
+       r="126.03077" />
+    <circle
+       style="fill:none;stroke:#282828;stroke-width:4.92309;stroke-dasharray:none;stroke-opacity:1"
+       id="circle11"
+       cx="538.46155"
+       cy="960"
+       r="157.53845" />
+    <path
+       style="fill:none;stroke:#282828;stroke-width:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 380.9231,960 H 63.999996"
+       id="path12" />
+    <path
+       style="fill:none;stroke:#282828;stroke-width:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 696,960 h 320"
+       id="path13" />
   </g>
 </svg>

@@ -1,5 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckpppunlfsm1x"]
+[gd_scene load_steps=3 format=3 uid="uid://ckpppunlfsm1x"]
 
 [ext_resource type="PackedScene" uid="uid://b76n80msqdg7o" path="res://Scenes/BaseLevel/BaseLevel.tscn" id="1_ubjmb"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xaqor"]
+size = Vector2(1600, 16)
+
 [node name="DebugLevel" instance=ExtResource("1_ubjmb")]
+
+[node name="BorderCenter" type="StaticBody2D" parent="Borders" index="12"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BorderCenter" index="0"]
+shape = SubResource("RectangleShape2D_xaqor")
