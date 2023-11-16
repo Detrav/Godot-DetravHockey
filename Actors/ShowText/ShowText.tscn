@@ -4,7 +4,6 @@
 
 [sub_resource type="Animation" id="Animation_eq4tr"]
 resource_name = "FadeOut"
-length = 1.0
 step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
