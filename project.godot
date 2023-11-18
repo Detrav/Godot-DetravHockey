@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="DetravHockey"
-run/main_scene="res://Scenes/DebugScene/DebugLevel.tscn"
+run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+WebRtcSingleton="*res://Singletons/WebRTCSingleton.gd"
 
 [display]
 

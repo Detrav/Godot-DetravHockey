@@ -7,7 +7,7 @@ public partial class PlayerBase : CharacterBody2D
     protected float Speed = 500;
     protected Ball ball;
 
-    public Vector2 CurrentSpeed { get; private set; }
+    public Vector2 CurrentSpeed { get; set; }
 
     public override void _Ready()
     {

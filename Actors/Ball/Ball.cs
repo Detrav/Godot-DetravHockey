@@ -4,7 +4,7 @@ using System;
 public partial class Ball : CharacterBody2D
 {
 
-    private Vector2 direction;
+    public Vector2 Direction { get; set; }
     private float speed;
     private float friction = 0.75f;
     int frameSkip = 0;
@@ -33,7 +33,7 @@ public partial class Ball : CharacterBody2D
             frameSkip--;
         }
 
-        var travel = direction * Speed * (float)delta;
+        var travel = Direction * Speed * (float)delta;
 
         int i = 0;
 
@@ -66,16 +66,16 @@ public partial class Ball : CharacterBody2D
                 var target = (Position - characterBody.Position).Normalized() * speed;
                 var targetVelocity = characterBody.CurrentSpeed * 2;
 
-                direction = (target + targetVelocity) / 2;
+                Direction = (target + targetVelocity) / 2;
 
 
-                Speed = direction.Length() / friction;
+                Speed = Direction.Length() / friction;
 
                 if (Speed < 500) Speed = 500;
 
-                direction = direction.Normalized();
+                Direction = Direction.Normalized();
 
-                travel = direction * Speed * (float)delta;
+                travel = Direction * Speed * (float)delta;
 
                 //if ((characterBody.Position - Position).Length() < 110)
                 //{
@@ -99,7 +99,7 @@ public partial class Ball : CharacterBody2D
 
 
                 travel = travel.Bounce(normal);
-                direction = direction.Bounce(normal);
+                Direction = Direction.Bounce(normal);
             }
         }
 

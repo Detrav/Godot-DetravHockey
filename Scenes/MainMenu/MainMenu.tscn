@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcixmg4ulecr4"]
+
+[ext_resource type="Script" path="res://Scenes/MainMenu/MainMenu.cs" id="1_mmn50"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wo1kw"]
+font_size = 100
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mmn50")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Detrav Hockey"
+label_settings = SubResource("LabelSettings_wo1kw")
+
+[node name="ButtonSingle" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Play single"
+
+[node name="ButtonStartServer" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Start lobby"
+
+[node name="ButtonStartSignalServer" type="Button" parent="CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Start Signal Server"
+
+[node name="ButtonConnectServer" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Join lobby"
+
+[node name="ButtonExit" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Exit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonSingle" to="." method="_on_button_single_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonStartServer" to="." method="_on_button_start_server_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonStartSignalServer" to="." method="_on_button_start_signal_server_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonConnectServer" to="." method="_on_button_connect_server_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]

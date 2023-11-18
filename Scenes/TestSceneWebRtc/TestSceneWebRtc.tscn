@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://doi8nthnjgs8u"]
+
+[ext_resource type="Script" path="res://Scenes/TestSceneWebRtc/TestSceneWebRtc.gd" id="1_yr6cd"]
+
+[node name="TestSceneWebRTC" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yr6cd")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 68.0
+offset_right = 292.0
+offset_bottom = 160.0
+text = "Server"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 212.0
+offset_right = 296.0
+offset_bottom = 304.0
+text = "Client"

@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dpu65gxp7fl2u" path="res://Actors/Borders/VertBorderRed.tscn" id="5_2uutx"]
 [ext_resource type="PackedScene" uid="uid://b0omd46gki1a" path="res://Actors/Players/MousePlayer.tscn" id="6_kuyih"]
 [ext_resource type="PackedScene" uid="uid://d0ro78s4ntfdm" path="res://Actors/Ball/Ball.tscn" id="7_4ectl"]
-[ext_resource type="PackedScene" uid="uid://boo15t2yelbrr" path="res://Actors/Players/AiPlayer.tscn" id="8_mgm3t"]
 [ext_resource type="PackedScene" uid="uid://bc6lxjlopall" path="res://Actors/ShowText/ShowText.tscn" id="10_n0xtb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qae1i"]
+size = Vector2(1600, 16)
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_k0wh7")
@@ -71,13 +73,17 @@ position = Vector2(0, 800)
 
 [node name="Ball" parent="." instance=ExtResource("7_4ectl")]
 
-[node name="AI_Player" parent="." instance=ExtResource("8_mgm3t")]
-position = Vector2(0, -800)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="ShowText" parent="CanvasLayer" instance=ExtResource("10_n0xtb")]
+
+[node name="BorderCenter" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderCenter"]
+shape = SubResource("RectangleShape2D_qae1i")
 
 [connection signal="body_entered" from="Borders/TopBorder" to="." method="_on_top_border_body_entered"]
 [connection signal="body_entered" from="Borders/BottomBorder" to="." method="_on_bottom_border_body_entered"]

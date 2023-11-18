@@ -1,15 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckpppunlfsm1x"]
 
 [ext_resource type="PackedScene" uid="uid://b76n80msqdg7o" path="res://Scenes/BaseLevel/BaseLevel.tscn" id="1_ubjmb"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xaqor"]
-size = Vector2(1600, 16)
+[ext_resource type="PackedScene" uid="uid://boo15t2yelbrr" path="res://Actors/Players/AiPlayer.tscn" id="2_x4twa"]
 
 [node name="DebugLevel" instance=ExtResource("1_ubjmb")]
 
-[node name="BorderCenter" type="StaticBody2D" parent="Borders" index="12"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BorderCenter" index="0"]
-shape = SubResource("RectangleShape2D_xaqor")
+[node name="AI_Player" parent="." index="6" instance=ExtResource("2_x4twa")]
+position = Vector2(0, -800)
