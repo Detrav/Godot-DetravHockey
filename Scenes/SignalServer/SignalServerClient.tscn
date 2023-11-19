@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cokhqp3y3je76"]
-
-[ext_resource type="Script" path="res://Scenes/SignalServer/SignalServerClient.gd" id="1_pknfk"]
-
-[node name="SignalServerClient" type="Node"]
-script = ExtResource("1_pknfk")

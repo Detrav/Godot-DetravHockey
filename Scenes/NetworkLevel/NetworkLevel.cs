@@ -1,3 +1,4 @@
+using DetravHockey.Server.Packets;
 using Godot;
 using Godot.Collections;
 using System;
@@ -5,73 +6,63 @@ using System;
 public partial class NetworkLevel : BaseLevel
 {
     private Ball ball;
-    private Node rtc;
-    private bool isServer;
+    
     private PlayerBase localPlayer;
     private PlayerBase remotePlayer;
 
     public override void _Ready()
     {
-        rtc = GetNode<Node>("/root/WebRtcSingleton");
+        
         base._Ready();
         ball = GetNode<Ball>("Ball");
-        rtc.Connect("package_received", Callable.From<string>(PackageReceived));
-        isServer = rtc.Get("b_is_server").AsBool();
+        WSClientSingleton.Instance.Client.OnMessage += Client_OnMessage;
 
         localPlayer = GetNode<PlayerBase>("MousePlayer");
         remotePlayer = GetNode<PlayerBase>("NetworkPlayer");
     }
 
-    public void PackageReceived(string package)
+    private void Client_OnMessage(object sender, DetravHockey.Server.Packets.PacketBase e)
     {
-        var dict = Json.ParseString(package).AsGodotDictionary();
-        //GD.Print(dict);
-        if (dict["id"].AsString() == "ball")
+        switch (e)
         {
-            ball.Position = -new Vector2(dict["X"].AsSingle(), dict["Y"].AsSingle());
-            ball.Direction = -new Vector2(dict["DX"].AsSingle(), dict["DY"].AsSingle());
-            ball.Speed = dict["S"].AsSingle();
-        }
-        else if (dict["id"].AsString() == "player")
-        {
-            remotePlayer.Position = - new Vector2(dict["X"].AsSingle(), dict["Y"].AsSingle());
-            remotePlayer.CurrentSpeed = - new Vector2(dict["DX"].AsSingle(), dict["DY"].AsSingle());
+            case PlayerPositionPacket playerPositionPacket:
+                remotePlayer.Position = -new Vector2(playerPositionPacket.X, playerPositionPacket.Y);
+                remotePlayer.CurrentSpeed = -new Vector2(playerPositionPacket.DX, playerPositionPacket.DY);
+                break;
+
+            case BallPositionPacket ballPositionPacket:
+                ball.Position = -new Vector2(ballPositionPacket.X, ballPositionPacket.Y);
+                ball.Direction = -new Vector2(ballPositionPacket.DX, ballPositionPacket.DY);
+                ball.Speed = ballPositionPacket.S;
+                break;
         }
     }
 
-    public void SendPackage(string package)
-    {
-        rtc.Call("send_package", package);
-    }
+
 
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        if (isServer)
+        if (WSClientSingleton.Instance.IsServer)
         {
-            Dictionary ballDictonary = new Dictionary()
+            WSClientSingleton.Instance.Client.SendPacket(new BallPositionPacket()
             {
-                ["id"] = "ball",
-                ["X"] = ball.Position.X,
-                ["Y"] = ball.Position.Y,
-                ["DX"] = ball.Direction.X,
-                ["DY"] = ball.Direction.Y,
-                ["S"] = ball.Speed
-            };
-
-            SendPackage(Json.Stringify(ballDictonary));
+                X = ball.Position.X,
+                Y = ball.Position.Y,
+                DX = ball.Direction.X,
+                DY = ball.Direction.Y,
+                S = ball.Speed
+            });
         }
 
-        Dictionary playerDictionary = new Dictionary()
+        WSClientSingleton.Instance.Client.SendPacket(new PlayerPositionPacket()
         {
-            ["id"] = "player",
-            ["X"] = localPlayer.Position.X,
-            ["Y"] = localPlayer.Position.Y,
-            ["DX"] = localPlayer.CurrentSpeed.X,
-            ["DY"] = localPlayer.CurrentSpeed.Y,
-        };
+            X = localPlayer.Position.X,
+            Y = localPlayer.Position.Y,
+            DX = localPlayer.CurrentSpeed.X,
+            DY = localPlayer.CurrentSpeed.Y,
 
-        SendPackage(Json.Stringify(playerDictionary));
+        });
 
     }
 }

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gepno2naplhp"]
+
+[ext_resource type="Script" path="res://Server/WSServer.cs" id="1_wjn1n"]
+
+[node name="WSServer" type="Node"]
+script = ExtResource("1_wjn1n")

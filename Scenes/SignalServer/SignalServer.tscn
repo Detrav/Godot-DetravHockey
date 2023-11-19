@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxxqgnvdxxxr"]
-
-[ext_resource type="Script" path="res://Scenes/SignalServer/SignalServer.gd" id="1_bubtp"]
-
-[node name="SignalServer" type="Node"]
-script = ExtResource("1_bubtp")

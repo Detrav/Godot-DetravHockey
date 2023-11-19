@@ -8,9 +8,13 @@ public partial class MainMenu : Control
     {
         GetNode<Control>("CenterContainer/VBoxContainer/ButtonStartSignalServer").Visible = OS.IsDebugBuild();
 
+        
+        DisplayServer.WindowSetTitle("Session " + (new Random().Next(int.MaxValue)) );
+        
+
         if (OS.HasFeature("dedicated_server"))
         {
-            GetTree().ChangeSceneToFile("res://Scenes/SignalServer/SignalServer.tscn");
+            GetTree().ChangeSceneToFile("res://Server/WSServer.tscn");
         }
     }
 
@@ -36,7 +40,7 @@ public partial class MainMenu : Control
 
     public void _on_button_start_signal_server_pressed()
     {
-        GetTree().ChangeSceneToFile("res://Scenes/SignalServer/SignalServer.tscn");
+        GetTree().ChangeSceneToFile("res://Server/WSServer.tscn");
     }
 
     public void _on_button_connect_server_pressed()

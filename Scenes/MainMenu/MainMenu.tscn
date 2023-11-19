@@ -45,7 +45,7 @@ text = "Start lobby"
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 72
-text = "Start Signal Server"
+text = "Start Server"
 
 [node name="ButtonConnectServer" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
