@@ -12,7 +12,8 @@ public partial class StartLobbyMenu : Control
 	{
         WSClientSingleton.Instance.IsServer = true;
         var socket = new WebSocketPeer();
-        socket.ConnectToUrl("ws://20.203.167.235:9080");
+        socket.ConnectToUrl("ws://20.203.167.235:9080/detravhockey");
+        //socket.ConnectToUrl("ws://localhost:9080/detravhockey");
         client = new WSServerClient();
         client.Socket = socket;
         WSClientSingleton.Instance.AddChild(client);

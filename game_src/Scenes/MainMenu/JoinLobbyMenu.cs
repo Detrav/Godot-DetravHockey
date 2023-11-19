@@ -13,7 +13,8 @@ public partial class JoinLobbyMenu : Control
     {
         WSClientSingleton.Instance.IsServer = false;
         var socket = new WebSocketPeer();
-        socket.ConnectToUrl("ws://20.203.167.235:9080");
+        socket.ConnectToUrl("ws://20.203.167.235:9080/detravhockey");
+        //socket.ConnectToUrl("ws://localhost:9080/detravhockey");
         client = new WSServerClient();
         client.Socket = socket;
 

@@ -26,8 +26,8 @@ public partial class NetworkLevel : BaseLevel
         switch (e)
         {
             case PlayerPositionPacket playerPositionPacket:
-                remotePlayer.Position = -new Vector2(playerPositionPacket.X, playerPositionPacket.Y);
-                remotePlayer.CurrentSpeed = -new Vector2(playerPositionPacket.DX, playerPositionPacket.DY);
+                remotePlayer.TargetPosition = -new Vector2(playerPositionPacket.X, playerPositionPacket.Y);
+                //remotePlayer.CurrentSpeed = -new Vector2(playerPositionPacket.DX, playerPositionPacket.DY);
                 break;
 
             case BallPositionPacket ballPositionPacket:
@@ -55,10 +55,12 @@ public partial class NetworkLevel : BaseLevel
             });
         }
 
+        var mouse = GetGlobalMousePosition();
+
         WSClientSingleton.Instance.Client.SendPacket(new PlayerPositionPacket()
         {
-            X = localPlayer.Position.X,
-            Y = localPlayer.Position.Y,
+            X = mouse.X,
+            Y = mouse.Y,
             DX = localPlayer.CurrentSpeed.X,
             DY = localPlayer.CurrentSpeed.Y,
 

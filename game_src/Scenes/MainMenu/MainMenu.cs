@@ -6,16 +6,11 @@ public partial class MainMenu : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        GetNode<Control>("CenterContainer/VBoxContainer/ButtonStartSignalServer").Visible = OS.IsDebugBuild();
-
+       
         
         DisplayServer.WindowSetTitle("Session " + (new Random().Next(int.MaxValue)) );
         
 
-        if (OS.HasFeature("dedicated_server"))
-        {
-            GetTree().ChangeSceneToFile("res://Server/WSServer.tscn");
-        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

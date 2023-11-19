@@ -41,12 +41,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 72
 text = "Start lobby"
 
-[node name="ButtonStartSignalServer" type="Button" parent="CenterContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 72
-text = "Start Server"
-
 [node name="ButtonConnectServer" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 72
@@ -59,6 +53,5 @@ text = "Exit"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonSingle" to="." method="_on_button_single_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonStartServer" to="." method="_on_button_start_server_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonStartSignalServer" to="." method="_on_button_start_signal_server_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonConnectServer" to="." method="_on_button_connect_server_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]

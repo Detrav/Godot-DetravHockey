@@ -12,19 +12,18 @@ public partial class WSServerClient : Node
     {
         TypeInfoResolver = new MyCustomResolver()
     };
-    private WSServer server;
+
 
     public event EventHandler<PacketBase> OnMessage;
     public WebSocketPeer Socket { get; internal set; }
     public bool Connected { get; private set; }
-    public Lobby Lobby { get; set; }
 
 
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        server = GetParent() as WSServer;
+
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,17 +57,7 @@ public partial class WSServerClient : Node
 
     public override void _ExitTree()
     {
-        if (Lobby != null)
-        {
-            if (server.Lobbies.Remove(Lobby.Name))
-            {
-                foreach (var player in Lobby.Players)
-                {
-                    player.QueueFree();
-                }
-            }
-
-        }
+       
         Connected = false;
         Socket.Close();
     }
