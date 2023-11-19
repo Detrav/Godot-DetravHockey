@@ -24,13 +24,17 @@ func _process(delta):
 
 	if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
 		while socket.get_available_packet_count():
-			process_packet(JSON.parse_string(socket.get_packet().get_string_from_utf8()))
+			var json_text = socket.get_packet().get_string_from_utf8()
+			print(json_text)
+			process_packet(JSON.parse_string( json_text))
 	elif socket.get_ready_state() == WebSocketPeer.STATE_CLOSED:
 		queue_free()
 		log_message("Close lobby " + lobby_name)
 
 func send_packet(packet : Variant):
-	socket.send( JSON.stringify(packet).to_utf8_buffer())
+	var json_text = JSON.stringify(packet)
+	print(json_text)
+	socket.send( json_text.to_utf8_buffer())
 
 func process_packet(packet : Variant):
 	if packet.id == "get_lobby_list":

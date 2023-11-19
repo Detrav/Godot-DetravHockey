@@ -34,6 +34,12 @@ func _process(delta):
 			var reason = ws.get_close_reason()
 			$CenterContainer/VBoxContainer/Label2.text = "WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1]
 			process_internal = false
+	if global_state == 1 :
+		var webrtc = get_tree().root.get_node("/root/WebRtcSingleton")
+		if is_instance_valid(webrtc.peer) :
+			var rtc = webrtc.peer as WebRTCPeerConnection
+			var ch = webrtc.channel as WebRTCDataChannel
+			$CenterContainer/VBoxContainer/LabelDebug.text = "%d : %d : %d : %d" % [rtc.get_connection_state(), rtc.get_gathering_state(), rtc.get_signaling_state(), ch.get_ready_state() if is_instance_valid(ch) else -1]
 
 func _on_button_back_pressed():
 	get_tree().change_scene_to_file("res://Scenes/MainMenu/MainMenu.tscn")
@@ -49,6 +55,8 @@ func process_packet(packet : Variant):
 	elif packet.id == "add_ice_candidate":
 		var webrtc = get_tree().root.get_node("/root/WebRtcSingleton")
 		webrtc.add_ice_candidate(packet.media,packet.index,packet.name)
+	
+
 		
 func send_packet(packet : Variant):
 	ws.send( JSON.stringify(packet).to_utf8_buffer())
