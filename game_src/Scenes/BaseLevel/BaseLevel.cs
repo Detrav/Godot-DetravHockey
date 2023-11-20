@@ -24,23 +24,27 @@ public partial class BaseLevel : Node2D
     {
         if (body is Ball ball)
         {
-            ball.Velocity = Vector2.Zero;
-            ball.Position = Vector2.Zero;
-            ball.Speed = 0;
+            NewLevel(ball);
             blue++;
             ShowTextNode.ShowTextWithAnim("Blue goal!\n" + blue + " - " + red);
         }
+    }
+
+    protected virtual void NewLevel(Ball ball)
+    {
+        ball.Velocity = Vector2.Zero;
+        ball.Position = Vector2.Zero;
+        ball.Speed = 0;
     }
 
     public void _on_bottom_border_body_entered(Node2D body)
     {
         if (body is Ball ball)
         {
-            ball.Velocity = Vector2.Zero;
-            ball.Position = Vector2.Zero;
-            ball.Speed = 0;
+            NewLevel(ball);
             red++;
             ShowTextNode.ShowTextWithAnim("Red goal!\n" + blue + " - " + red);
+            
         }
 
     }

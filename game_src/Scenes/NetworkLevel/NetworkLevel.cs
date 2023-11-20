@@ -15,10 +15,46 @@ public partial class NetworkLevel : BaseLevel
         
         base._Ready();
         ball = GetNode<Ball>("Ball");
+        ball.OnBounce += Ball_OnBounce;
         WSClientSingleton.Instance.Client.OnMessage += Client_OnMessage;
 
         localPlayer = GetNode<PlayerBase>("MousePlayer");
         remotePlayer = GetNode<PlayerBase>("NetworkPlayer");
+    }
+
+    private void Ball_OnBounce(object sender, GodotObject e)
+    {
+        
+            
+        if(ball.Position.Y > 0 || Math.Abs(ball.Position.Y) < 20)
+        {
+            GD.Print(ball.Position);
+
+            WSClientSingleton.Instance.Client.SendPacket(new BallPositionPacket()
+            {
+                X = ball.Position.X,
+                Y = ball.Position.Y,
+                DX = ball.Direction.X,
+                DY = ball.Direction.Y,
+                S = ball.Speed
+            });
+        }
+    }
+
+    protected override void NewLevel(Ball ball)
+    {
+        //if (WSClientSingleton.Instance.IsServer)
+        //{
+        //    WSClientSingleton.Instance.Client.SendPacket(new BallPositionPacket()
+        //    {
+        //        X = ball.Position.X,
+        //        Y = ball.Position.Y,
+        //        DX = ball.Direction.X,
+        //        DY = ball.Direction.Y,
+        //        S = ball.Speed
+        //    });
+        //}
+        base.NewLevel(ball);
     }
 
     private void Client_OnMessage(object sender, DetravHockey.Server.Packets.PacketBase e)
@@ -43,17 +79,7 @@ public partial class NetworkLevel : BaseLevel
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        if (WSClientSingleton.Instance.IsServer)
-        {
-            WSClientSingleton.Instance.Client.SendPacket(new BallPositionPacket()
-            {
-                X = ball.Position.X,
-                Y = ball.Position.Y,
-                DX = ball.Direction.X,
-                DY = ball.Direction.Y,
-                S = ball.Speed
-            });
-        }
+       
 
         var mouse = GetGlobalMousePosition();
 

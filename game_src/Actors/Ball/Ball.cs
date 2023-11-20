@@ -9,6 +9,8 @@ public partial class Ball : CharacterBody2D
     private float friction = 0.75f;
     int frameSkip = 0;
 
+    public event EventHandler<GodotObject> OnBounce;
+
     public float Speed
     {
         get => speed;
@@ -101,6 +103,8 @@ public partial class Ball : CharacterBody2D
                 travel = travel.Bounce(normal);
                 Direction = Direction.Bounce(normal);
             }
+
+            OnBounce?.Invoke(this, hit.GetCollider());
         }
 
         if (i >= 4)
